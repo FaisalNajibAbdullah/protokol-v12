@@ -1,0 +1,333 @@
+{
+  "title": "V12 F5 second confirmation before accessing BTS 2025",
+  "status": "LOCAL_PROTOCOL_PENDING_EXTERNAL_VERIFICATION",
+  "created_utc": "2026-11-01T15:14:05.820687+00:00",
+  "hypotheses": [
+    {
+      "id": "D1",
+      "contrast": "HGB noDay - HGB withDay",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "forward"
+    },
+    {
+      "id": "D2",
+      "contrast": "HGB noDay - Logistic noDay",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "forward"
+    },
+    {
+      "id": "D3",
+      "contrast": "Logistic withDay - SimpleRate",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "forward"
+    },
+    {
+      "id": "D4",
+      "contrast": "HGB noDay - SimpleRate",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "forward"
+    },
+    {
+      "id": "D5",
+      "contrast": "HGB withDay C-A",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "E1"
+    },
+    {
+      "id": "D6",
+      "contrast": "HGB withDay B-A equivalent within +/-0.01",
+      "kind": "equivalence",
+      "boundary": 0.0,
+      "source": "E1",
+      "margin": 0.01
+    },
+    {
+      "id": "D7",
+      "contrast": "Logistic static first month - last month",
+      "kind": "superiority",
+      "boundary": 0.0,
+      "source": "static"
+    }
+  ],
+  "family_size": 7,
+  "protocol": {
+    "version": "V12.0-local-py39",
+    "seed": 42,
+    "FAST_MODE": false,
+    "SUBSET_MODE": false,
+    "stages": {
+      "F1": true,
+      "F2": true,
+      "F3": true,
+      "F4": true,
+      "F5": true,
+      "F6": true,
+      "F7": true
+    },
+    "RUN_PSO": false,
+    "workers": 4,
+    "development_base": "archive/",
+    "confirmatory_base": "archive_confirmatory2/",
+    "bts_month_sample_n": 60000,
+    "bts_chunksize": 75000,
+    "bts_month_seed_offset": 1000,
+    "bts_primary_target": "ge15",
+    "bts_sensitivity_target": "gt0",
+    "category_min_frequency": 30,
+    "category_max_categories": 128,
+    "baseline_smoothing": 20.0,
+    "outer_folds": 5,
+    "outer_repeats": 1,
+    "inner_folds": 3,
+    "selection": "MCC",
+    "primary_metrics": [
+      "AUC",
+      "AP",
+      "Lift10"
+    ],
+    "alpha": 0.05,
+    "bootstrap_reps": 20000,
+    "bootstrap_batch": 32,
+    "confirm_bootstrap_reps": 20000,
+    "f1_families": {
+      "time": 51,
+      "RF": 60
+    },
+    "rf_draw_seeds": [
+      1,
+      2,
+      3
+    ],
+    "rf_ext_candidates": 120,
+    "rf_surrogate_n": 200,
+    "rf_surrogate_eta_bins": 5,
+    "rf_paper_space": {
+      "n_estimators": [
+        50,
+        400
+      ],
+      "max_depth": [
+        3,
+        30
+      ],
+      "min_samples_leaf": [
+        1,
+        20
+      ],
+      "min_samples_split": [
+        2,
+        20
+      ]
+    },
+    "rf_max_features_space": [
+      "sqrt",
+      0.3,
+      0.5,
+      0.8,
+      1.0
+    ],
+    "pso_particles": 10,
+    "pso_iterations": 20,
+    "pso_w": 0.7,
+    "pso_c1": 1.5,
+    "pso_c2": 1.5,
+    "olist_min_train_months": 8,
+    "olist_test_months": 2,
+    "olist_purge_label_availability": true,
+    "e5_repeats": 100,
+    "e5_delta": [
+      0.005,
+      0.01,
+      0.02,
+      0.03,
+      0.05,
+      0.1
+    ],
+    "e5_q": [
+      1.0,
+      0.5
+    ],
+    "e5_outer_folds": 5,
+    "e5_inner_folds": 3,
+    "e5_olist_n": 96470,
+    "e5_cost_iterations": 100,
+    "e5_permutations": 499,
+    "e5_z_clip": 4.0,
+    "e5_risk_quantiles": 5,
+    "e5_preflight_repetitions": 3,
+    "e5_stop_S1_if_auc_not_positive": true,
+    "e5_null": "S0 label dipermutasi, tanpa injeksi; kontrol null independen",
+    "e5_fixed_assay_reference": {
+      "version": "V10",
+      "delta": 0.01,
+      "power": 0.99,
+      "n": 96470,
+      "scope": "referensi historis; bukan uji berpasangan"
+    },
+    "block_lengths": {
+      "BTS": [
+        1,
+        3,
+        7,
+        14,
+        30,
+        60
+      ],
+      "Olist": [
+        1,
+        3,
+        7,
+        14,
+        30,
+        60,
+        90
+      ]
+    },
+    "block_buffers": [
+      0,
+      3,
+      7
+    ],
+    "block_folds": 5,
+    "matched_min_train": 200,
+    "f3_bootstrap_reps": 2000,
+    "f3_bts_months": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "f3_fast_per_month_n": 30000,
+    "f3_fast_olist_n": 30000,
+    "match_scope": "minimum seluruh buffer pada dataset,L,fold; satu buffer tidak feasible => matched fold tidak feasible",
+    "recommended_block_auc_tolerance": 0.01,
+    "dependence_bootstrap_reps": 2000,
+    "dependence_block_days": 14,
+    "confirm_required_months": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "confirm_year": 2025,
+    "confirm_family_m": 7,
+    "confirm_alpha": 0.05,
+    "confirm_e1_months": [
+      3,
+      4,
+      5
+    ],
+    "confirm_repeats": 5,
+    "confirm_train_n": 30000,
+    "confirm_test_n": 30000,
+    "e1_future_fraction": 0.25,
+    "confirm_equivalence_margin": 0.01,
+    "confirmatory_scope": "hanya F5; seluruh 2024 kini pengembangan",
+    "fixed_models": [
+      "Logistic",
+      "HGB"
+    ],
+    "active_learners": [
+      "Logistic",
+      "HGB"
+    ],
+    "synth_status": "kemungkinan simulator; telah dilihat berulang V1-V11",
+    "protocol_status": "ditetapkan setelah V11; F1-F4/F6/F7 EKSPLORATIF, F5 belum dibuka",
+    "external_config": null
+  },
+  "protocol_sha256": "9a54aa218b20f1718e112a3e4d1cf656193109210f4845866b5d18e8210d0465",
+  "implementation_hash": "97927b4acbaea898798be30f36cb86108b5fbebde7b719c90e0618d0db3d8d69",
+  "library_versions": {
+    "python": "3.9.6",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "sklearn": "1.6.1",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.2",
+    "seaborn": "0.13.2",
+    "joblib": "1.5.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "development_sha256": {
+    "olist_orders_dataset.csv": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf",
+    "olist_order_items_dataset.csv": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279",
+    "olist_products_dataset.csv": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc",
+    "olist_customers_dataset.csv": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2",
+    "olist_sellers_dataset.csv": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e",
+    "olist_geolocation_dataset.csv": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6",
+    "product_category_name_translation.csv": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278",
+    "BTS_1": "e92febedf6cd51bd87eca0be2fba3f5c1f383b1da41119db7f1cc1a26c4d3286",
+    "BTS_2": "93124efb0044290561d7b077854ab6a539590151865f6b7a433320ec652ecdbe",
+    "BTS_3": "921fb78d9f7e4e181ecee146dbd6dc7925ccbae53fbdc0677e1c69e820be94c1",
+    "BTS_4": "80f5e471ba0ad42e9ab36abc8b7bfc08ae461c339fb7bc01a638cd2bd2d49e3e",
+    "BTS_5": "c3d4c4287efba23bb9332aa5b2b803d59e5fda2a3983623584970f130055c277",
+    "BTS_6": "a96a696f4e1972a9f239ae6bf665a0af4169d6447ccdc452430c9cbf6ac406d7",
+    "BTS_7": "08894d7a211469ff69234ea0ba5c8bad1abe565d0bfe3f1b547798a605078173",
+    "BTS_8": "a154c46b18d8dad0be6bbc30d9d01c840de697650b909e563475fc3a8d622d44",
+    "BTS_9": "2777b29a7d63ca0664006f647068f40cc0dda2b7c8a44b4415aa9ce44109da07",
+    "BTS_10": "23fdedaa43330b7f96ba6be740fedbfefd581f111edc548a74fa0bdb3c140527",
+    "BTS_11": "8698d29045044a70986640a22a9b43e69c45eae5a6f3f8e9b70db9db3dca1c58",
+    "BTS_12": "7900dd58227dc71e64a0e220000240ad6292e0f8c50ba16fb627b0976ceb68af",
+    "SYNTH": "606bc3d359cf45f2b242ae319ffd739d23c5dbebf89131c97c19c99fd39a824f"
+  },
+  "confirmatory_names_only": {
+    "1": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_1.csv",
+    "2": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_2.csv",
+    "3": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_3.csv",
+    "4": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_4.csv",
+    "5": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_5.csv",
+    "6": "archive_confirmatory2/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_6.csv"
+  },
+  "fixed_models": {
+    "Logistic": {
+      "C": 1.0
+    },
+    "HGB": {
+      "max_iter": 150,
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.5
+    }
+  },
+  "dry_run": {
+    "passed": true,
+    "development_only": true,
+    "year": 2024,
+    "static_months": [
+      11,
+      12
+    ],
+    "forward_months": [
+      12
+    ],
+    "e1_months": [
+      11
+    ],
+    "FAST_MODE": false,
+    "utc": "2026-11-01T14:34:56.883705+00:00",
+    "implementation_hash": "97927b4acbaea898798be30f36cb86108b5fbebde7b719c90e0618d0db3d8d69",
+    "protocol_sha256": "9a54aa218b20f1718e112a3e4d1cf656193109210f4845866b5d18e8210d0465"
+  },
+  "prior_access": "Seluruh 2024 sudah pengembangan setelah V11; isi 2025 belum dibuka oleh notebook.",
+  "decisions": "CI Bonferroni DAN p Holm; D6 TOST dengan CI 1-2alpha/m seluruhnya di (-.01,.01)",
+  "opposite_rule": "D1-D5,D7: upper<0. D6: CI seluruhnya di luar band ekuivalensi.",
+  "horizon_definition": "Indeks bulan sejak Jan2024 =13-18; horizon sejak akhir pelatihan Des2024 =1-6.",
+  "bootstrap_scope": "Conditional pada model dan hari dalam tiap bulan uji; bukan variasi antar-bulan atau refit.",
+  "external_evidence": "Hash isi remote JSON/MD diverifikasi melalui HTTPS; tanggal commit Git bukan waktu publikasi independen."
+}
